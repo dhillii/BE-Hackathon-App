@@ -1,0 +1,20 @@
+<div class="view">
+    <div> 
+        <img class="toyota-logo" src="img/Toyota%20logo.png"/>
+        <h1 class=Ride-Along>Ride Along</h1>
+        
+        <form ua-login>
+            <input class="username-field" name="login" placeholder="Username"> <br>
+            <input type="password" class="password-field" name="password" placeholder="Password"> <br>
+            <button type="submit" class="login-button">Log in</button>
+
+            <p ng-show="loading"><img src="https://app.userapp.io/img/ajax-loader-transparent.gif"></p>
+            <p ng-show="error">{{ error.message }}</p>
+        </form>
+
+        <p><a href="/signup" class="signup">Create Account</a><a class="help">Need Help?</a></p>
+    </div>
+</div>
+
+
+

@@ -1,5 +1,4 @@
 'use strict';
-import { Camera } from 'ionic-native';
 
 // Ionic Starter App
 
@@ -10,6 +9,7 @@ var app = angular.module('myApp', [
     'ionic',
     'ui.router',
     'UserApp',
+    'ionic.native'
 ]);
 
 app.run(function($ionicPlatform, user) {
@@ -50,12 +50,31 @@ app.controller('loginCtrl', function($scope, $http, $location) {
     console.log('login controller active.')
 });
 
-app.controller('signupCtrl', function($scope, $http, $location) {
+app.controller('signupCtrl', function($scope, $http, $location, $cordovaCamera,  $ionicPlatform) {
     //Changes the view/page
     $scope.changeview = function(path) {
         $location.path(path).replace();
     }
+    
+    $scope.DATA = "Upload a Picture"
+    $scope.license;
 
+    // wait for ondeviceready, or use $ionicPlatform.ready() if you're using Ionic Framework 1
+    $scope.takePicture = function() {
+      // now we can call any of the functionality as documented in Native docs
+      $cordovaCamera.getPicture().then(
+        function(res) {
+          console.log("We have taken a picture!", res);
+          $scope.DATA = "PICTURE UPLOADED!!"
+          $scope.license = res;
+        },
+        function(err){
+          console.error("Error taking a picture", err);
+          $scope.DATA = "Error!"
+        }
+      );
+    }
+    
 });
 
 
