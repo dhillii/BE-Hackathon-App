@@ -116,12 +116,85 @@ p {
     color: white;
 }
 
-/* Username: */
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #664646;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    opacity: 100%;
+}
 
-/* Oval: */
-border: 2px solid #FFFFFF;
-/* Shape: */
-border: 2px solid #FFFFFF;
-/* Path: */
-border: 2px solid #FFFFFF;
-/* Bounds: */
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #fff;
+    display: block;
+    transition: 0.3s
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.openbtn {
+    position: absolute;
+    top: 15px;
+    left: 25px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    padding: 20px;
+}
+
+#info {
+    width: 75%;
+    display: block;
+    margin: 0 auto 0 auto;
+    text-align: center;
+}
+
+.light {
+    float: left;
+}
+.temperature {
+    float: right;
+    font-size: 170px;
+}
+
+.temperature p{
+    float: right;
+    font-size: 45px;
+}
+.logout-link {
+    bottom: 100px;
+    position: absolute;
+}
+
+hr {
+    border: 5px solid #9B9B9B;
+    clear: both;
+}
+
+.add-payment{
+    background-color: red;
+}

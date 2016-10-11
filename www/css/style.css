@@ -166,8 +166,35 @@ p {
     padding: 20px;
 }
 
+#info {
+    width: 75%;
+    display: block;
+    margin: 0 auto 0 auto;
+    text-align: center;
+}
 
+.light {
+    float: left;
+}
+.temperature {
+    float: right;
+    font-size: 170px;
+}
+
+.temperature p{
+    float: right;
+    font-size: 45px;
+}
 .logout-link {
     bottom: 100px;
     position: absolute;
+}
+
+hr {
+    border: 5px solid #9B9B9B;
+    clear: both;
+}
+
+.add-payment{
+    background-color: red;
 }

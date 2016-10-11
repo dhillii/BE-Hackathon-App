@@ -12,6 +12,35 @@ var app = angular.module('myApp', [
     'ionic.native'
 ]);
 
+app.factory('idscanAPI', ['$http',
+    function($http) {
+        return {
+
+            //API from IDSCAN to parse ID barcodes
+            analyzeURL: function(image, callback) {
+                $http({
+                    method: 'GET',
+                    url:  'https://app1.idware.net/DriverLicenseParserRest.svc/ParseImage',
+                    headers: {
+                       'Content-Type': 'text/json',
+                       'Cache-Control': 'no-cache'
+                    },
+                    data: {
+                       "authKey": 'cd8594f1-df5f-4296-a155-92a977682923',
+                       "data": image
+                    },
+                }).then(function successCallback(result) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    callback(result);
+
+                })
+            }
+
+        
+    }
+}]);
+
 app.run(function($ionicPlatform, user) {
   // Initiate the user service with your UserApp App Id
   // https://help.userapp.io/customer/portal/articles/1322336-how-do-i-find-my-app-id-
@@ -35,11 +64,15 @@ app.run(function($ionicPlatform, user) {
 });
 
 //Controls initial landing page
-app.controller('mainCtrl', function($scope, $http, $location) {
-    //Changes the view/page
-    $scope.changeview = function(path) {
-        $location.path(path).replace();
+app.controller('mainCtrl', function($scope, $http, $location ) {
+    //Sidenav Functions
+    $scope.navOpen = false;
+    $scope.clickedNav = function(){
+        $scope.navOpen = !$scope.navOpen;
+        console.log($scope.navOpen);
     }
+    
+    $scope.selection = 'home';
 });
 
 app.controller('loginCtrl', function($scope, $http, $location) {
@@ -65,8 +98,13 @@ app.controller('signupCtrl', function($scope, $http, $location, $cordovaCamera, 
       $cordovaCamera.getPicture().then(
         function(res) {
           console.log("We have taken a picture!", res);
-          $scope.DATA = "PICTURE UPLOADED!!"
+          console.log(res);
           $scope.license = res;
+          idscanAPI.analyzeURL(res, function(data) {
+                console.log(data);
+            })
+          $scope.DATA = "PICTURE UPLOADED!!"
+          
         },
         function(err){
           console.error("Error taking a picture", err);
@@ -77,14 +115,13 @@ app.controller('signupCtrl', function($scope, $http, $location, $cordovaCamera, 
     
 });
 
-
 //Switches between pages/views
 app.config(function($stateProvider, $urlRouterProvider) {
     // Use $urlRouterProvider to configure any redirects (when) and invalid urls (otherwise).
     $urlRouterProvider
 
     // If the url is ever invalid, e.g. '/asdf', then redirect to '/' aka the home state
-    .otherwise('/');
+    .otherwise('/main/info');
     
     $stateProvider
     .state('login', {
@@ -93,16 +130,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
         controller: "loginCtrl",
         data: { login: true },
     })
-    .state('main', {
-        url: "/",
-        templateUrl: "views/main.html",
-        controller: "mainCtrl",
-    })
     .state('signup', {
         url: "/signup",
         templateUrl: "views/signup.html",
         controller: "signupCtrl",
         data: { public: true },
+    })
+    .state('main', {
+        url: "/",
+        templateUrl: "views/main.html",
+        controller: "mainCtrl",
     })
 
 });

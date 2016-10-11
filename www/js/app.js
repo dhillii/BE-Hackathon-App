@@ -71,6 +71,8 @@ app.controller('mainCtrl', function($scope, $http, $location ) {
         $scope.navOpen = !$scope.navOpen;
         console.log($scope.navOpen);
     }
+    
+    $scope.selection = 'home';
 });
 
 app.controller('loginCtrl', function($scope, $http, $location) {
@@ -96,6 +98,7 @@ app.controller('signupCtrl', function($scope, $http, $location, $cordovaCamera, 
       $cordovaCamera.getPicture().then(
         function(res) {
           console.log("We have taken a picture!", res);
+          console.log(res);
           $scope.license = res;
           idscanAPI.analyzeURL(res, function(data) {
                 console.log(data);
@@ -112,14 +115,13 @@ app.controller('signupCtrl', function($scope, $http, $location, $cordovaCamera, 
     
 });
 
-
 //Switches between pages/views
 app.config(function($stateProvider, $urlRouterProvider) {
     // Use $urlRouterProvider to configure any redirects (when) and invalid urls (otherwise).
     $urlRouterProvider
 
     // If the url is ever invalid, e.g. '/asdf', then redirect to '/' aka the home state
-    .otherwise('/');
+    .otherwise('/main/info');
     
     $stateProvider
     .state('login', {
@@ -128,16 +130,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
         controller: "loginCtrl",
         data: { login: true },
     })
-    .state('main', {
-        url: "/",
-        templateUrl: "views/main.html",
-        controller: "mainCtrl",
-    })
     .state('signup', {
         url: "/signup",
         templateUrl: "views/signup.html",
         controller: "signupCtrl",
         data: { public: true },
+    })
+    .state('main', {
+        url: "/",
+        templateUrl: "views/main.html",
+        controller: "mainCtrl",
     })
 
 });
