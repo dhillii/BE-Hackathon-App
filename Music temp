@@ -1,0 +1,48 @@
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+</head>
+<style>
+    div #music { padding-bottom: 15px; border-bottom: 10px solid #9d9d9d; margin-bottom:10px;}
+    td #image1, image2{ vertical-align:middle; text-align:center; }
+    #image1, image2{ padding-top: 20px; padding-bottom: 20px}
+    #image1{padding-left:5px;padding-right:5px}
+</style>
+<div class = "view">
+    <div id="music">
+        <table>
+        
+            <tr>
+                <td><img src = "Vs The World.jpg" alt = "Vs The World" width= "85" height="95"></td>
+                <td></br><p><font size = "3"> Now Playing</font></br>
+                    <font size = "5">Money Longer</br>
+                    Lil Uzi Vert</p></font></p></td>
+            </tr>
+            
+        </table>
+    </div>
+    <div>
+        <ul style = "list-style: none">
+            <font size = "4"><li>Recent Selections  <i class="fa fa-angle-right" aria-hidden="true"></i></li></br>
+                <li>Download Music  <i class="fa fa-angle-right" aria-hidden="true"></i></li></br>
+                <li>Connect Soundcloud  <i class="fa fa-angle-right" aria-hidden="true"></i></li><br>
+                <li>Connect to Spotify  <i class="fa fa-angle-right" aria-hidden="true"></i></li></br>
+                <li>Connect Apple Music <i class="fa fa-angle-right" aria-hidden="true"></i></li></font>
+        </ul>
+    </div>
+    <div>
+        
+</div>
+</div>
+<footer>
+    <table>
+        
+            <tr>
+                <td id = "image1"><img src = "Vs The World.jpg" alt = "Vs The World" width= "50" height="45"></td>
+                <td width= "350"><p><font size = "1"> Now Playing</font></br>
+                    <font size = "3">Money Longer</br>
+                    Lil Uzi Vert vs. The World</p></font></p></td>
+                <td id = "image2"><i class="fa fa-plus-circle" aria-hidden="true" style= "font-size:30px;"></i></td>
+            </tr>
+            
+        </table>
+</footer>
