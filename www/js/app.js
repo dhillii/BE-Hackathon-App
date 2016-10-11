@@ -1,17 +1,23 @@
+'use strict';
+import { Camera } from 'ionic-native';
+
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app = angular.module('starter', [
+var app = angular.module('myApp', [
     'ionic',
-    'ngRoute',
-    'ngAnimate'
+    'ui.router',
+    'UserApp',
 ]);
 
+app.run(function($ionicPlatform, user) {
+  // Initiate the user service with your UserApp App Id
+  // https://help.userapp.io/customer/portal/articles/1322336-how-do-i-find-my-app-id-
+  user.init({ appId: '57fb721ea09a7' });
 
-app.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
+ $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -29,42 +35,67 @@ app.run(function($ionicPlatform) {
 });
 
 //Controls initial landing page
-app.controller('mainController', function($scope, $http, $location) {
+app.controller('mainCtrl', function($scope, $http, $location) {
     //Changes the view/page
     $scope.changeview = function(path) {
         $location.path(path).replace();
     }
 });
 
-
-//Switches between pages/views
-app.config(function($routeProvider, $locationProvider, $httpProvider) {
-    $routeProvider.
-    when('/', {
-        templateUrl: 'main.html',
-        controller:'landingController'
-    }).
-    when('/Customize', {
-        reloadOnSearch: false,
-        templateUrl: 'customize.html',
-        controller: 'customizeController'
-    }).
-    when('/FAQ', {
-        templateUrl: 'frequentquestions.html',
-        controller: 'FAQController'
-    }).
-    when('/AboutUs', {
-        templateUrl: 'aboutUs.html',
-        controller: 'AboutController'
-    }).
-    otherwise({
-        redirectTo: '/'
-    });
-
-    $locationProvider.html5Mode({
-      enabled: true,
-      requireBase: false
-    });
+app.controller('loginCtrl', function($scope, $http, $location) {
+    //Changes the view/page
+    $scope.changeview = function(path) {
+        $location.path(path).replace();
+    }
+    console.log('login controller active.')
 });
 
+app.controller('signupCtrl', function($scope, $http, $location) {
+    //Changes the view/page
+    $scope.changeview = function(path) {
+        $location.path(path).replace();
+    }
+
+});
+
+
+//Switches between pages/views
+app.config(function($stateProvider, $urlRouterProvider) {
+    // Use $urlRouterProvider to configure any redirects (when) and invalid urls (otherwise).
+    $urlRouterProvider
+
+    // If the url is ever invalid, e.g. '/asdf', then redirect to '/' aka the home state
+    .otherwise('/');
+    
+    $stateProvider
+    .state('login', {
+        url: "/login",
+        templateUrl: "views/login.html",
+        controller: "loginCtrl",
+        data: { login: true },
+    })
+    .state('main', {
+        url: "/",
+        templateUrl: "views/main.html",
+        controller: "mainCtrl",
+    })
+    .state('signup', {
+        url: "/signup",
+        templateUrl: "views/signup.html",
+        controller: "signupCtrl",
+        data: { public: true },
+    })
+
+});
+
+
+app.config(['$locationProvider', function ($locationProvider) {
+			$locationProvider.html5Mode({
+              enabled: true,
+              requireBase: false
+            });
+		}
+]);
+
 exports = app;
+
